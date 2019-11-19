@@ -108,18 +108,38 @@ public class PeriodicTableFragment extends Fragment implements AsyncTaskInsertDe
                 errorListener);
         requestQueue.add(stringRequest);
 
-        placeholder.findViewById(R.id.element1).setOnClickListener(new View.OnClickListener() {
+        setElementListeners1();
+        return placeholder;
+    }
+
+    public void setElementListeners1() {
+        int elementCounter = 0;
+        while (elementCounter < allElements.size()) {
+            final int counter = elementCounter;
+            placeholder.findViewById(allElements.get(elementCounter)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setElementListeners2(counter);
+                }
+            });
+            elementCounter++;
+        }
+    }
+
+    public void setElementListeners2(int counter) {
+        final int counter2 = counter;
+        placeholder.findViewById(allElements.get(counter2)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, ElementDetailActivity.class);
-                TextView atomicNumber = placeholder.findViewById(R.id.element1).findViewById(R.id.atomicNumber);
+                TextView atomicNumber = placeholder.findViewById(allElements.get(counter2)).findViewById(R.id.atomicNumber);
                 intent.putExtra("atomicNumber", atomicNumber.getText());
                 context.startActivity(intent);
             }
         });
-        return placeholder;
     }
+
 
     @Override
     public void handleTaskResult(String result) {
@@ -132,18 +152,16 @@ public class PeriodicTableFragment extends Fragment implements AsyncTaskInsertDe
 
     @Override
     public void handleTaskGetResult(List<Element> elements) {
-        int indexCounter = 0;
         int elementCounter = 0;
-        while (elementCounter < allElements.size() && indexCounter < allElements.size()) {
+        while (elementCounter < allElements.size()) {
             ConstraintLayout box = placeholder.findViewById(allElements.get(elementCounter));
             TextView name = box.findViewById(R.id.name);
             TextView symbol = box.findViewById(R.id.symbol);
             TextView atomicNumber = box.findViewById(R.id.atomicNumber);
-            name.setText(elements.get(indexCounter).getName());
+            name.setText(elements.get(elementCounter).getName());
             final String elementName = name.toString();
-            symbol.setText(elements.get(indexCounter).getSymbol());
-            atomicNumber.setText(Integer.toString(elements.get(indexCounter).getAtomicNumber()));
-            indexCounter++;
+            symbol.setText(elements.get(elementCounter).getSymbol());
+            atomicNumber.setText(Integer.toString(elements.get(elementCounter).getAtomicNumber()));
             elementCounter++;
         }
         ConstraintLayout lanthanides = placeholder.findViewById(R.id.Lanthanides);
