@@ -1,6 +1,7 @@
 package com.example.periodictable;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
@@ -30,14 +31,37 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PeriodicTableFragment extends Fragment implements AsyncTaskInsertDelegate, AsyncTaskGetDelegate {
 
     public String packageName;
     public Context context;
-    List<Element> elements;
-
+    List<Integer> allElements = Arrays.asList(R.id.element1, R.id.element2, R.id.element3,
+            R.id.element4, R.id.element5, R.id.element6, R.id.element7, R.id.element8,
+            R.id.element9, R.id.element10, R.id.element11, R.id.element12, R.id.element13,
+            R.id.element14, R.id.element15, R.id.element16, R.id.element17, R.id.element18,
+            R.id.element19, R.id.element20, R.id.element21, R.id.element22, R.id.element23,
+            R.id.element24, R.id.element25, R.id.element26, R.id.element27, R.id.element28,
+            R.id.element29, R.id.element30, R.id.element31, R.id.element32, R.id.element33,
+            R.id.element34, R.id.element35, R.id.element36, R.id.element37, R.id.element38,
+            R.id.element39, R.id.element40, R.id.element41, R.id.element42, R.id.element43,
+            R.id.element44, R.id.element45, R.id.element46, R.id.element47, R.id.element48,
+            R.id.element49, R.id.element50, R.id.element51, R.id.element52, R.id.element53,
+            R.id.element54, R.id.element55, R.id.element56, R.id.element57, R.id.element58,
+            R.id.element59, R.id.element60, R.id.element61, R.id.element62, R.id.element63,
+            R.id.element64, R.id.element65, R.id.element66, R.id.element67, R.id.element68,
+            R.id.element69, R.id.element70, R.id.element71, R.id.element72, R.id.element73,
+            R.id.element74, R.id.element75, R.id.element76, R.id.element77, R.id.element78,
+            R.id.element79, R.id.element80, R.id.element81, R.id.element82, R.id.element83,
+            R.id.element84, R.id.element85, R.id.element86, R.id.element87, R.id.element88,
+            R.id.element89, R.id.element90, R.id.element91, R.id.element92, R.id.element93,
+            R.id.element94, R.id.element95, R.id.element96, R.id.element97, R.id.element98,
+            R.id.element99, R.id.element100, R.id.element101, R.id.element102, R.id.element103,
+            R.id.element104, R.id.element105, R.id.element106, R.id.element107, R.id.element108,
+            R.id.element109, R.id.element110, R.id.element111, R.id.element112, R.id.element113,
+            R.id.element114, R.id.element115, R.id.element116, R.id.element117, R.id.element118);
     View placeholder;
 
     public PeriodicTableFragment() {
@@ -84,16 +108,16 @@ public class PeriodicTableFragment extends Fragment implements AsyncTaskInsertDe
                 errorListener);
         requestQueue.add(stringRequest);
 
-
-        /*for (int i = 1; i < 118; i++) {
-            String boxName = "R.id.element" + Integer.toString(i);
-            ConstraintLayout box = view.findViewById(getStringResourceByName(boxName));
-            ConstraintLayout box = view.findViewById(R.id.element1);
-            TextView name = box.findViewById(R.id.name);
-            TextView symbol = box.findViewById(R.id.symbol);
-            name.setText(elements.get(1).getName());
-            symbol.setText(elements.get(1).getSymbol());*/
-
+        placeholder.findViewById(R.id.element1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, ElementDetailActivity.class);
+                TextView atomicNumber = placeholder.findViewById(R.id.element1).findViewById(R.id.atomicNumber);
+                intent.putExtra("atomicNumber", atomicNumber.getText());
+                context.startActivity(intent);
+            }
+        });
         return placeholder;
     }
 
@@ -108,89 +132,35 @@ public class PeriodicTableFragment extends Fragment implements AsyncTaskInsertDe
 
     @Override
     public void handleTaskGetResult(List<Element> elements) {
-        ConstraintLayout box = placeholder.findViewById(R.id.element1);
-        TextView name = box.findViewById(R.id.name);
-        TextView symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(0).getName());
-        symbol.setText(elements.get(0).getSymbol());
-
-        box = placeholder.findViewById(R.id.element2);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(1).getName());
-        symbol.setText(elements.get(1).getSymbol());
-
-        box = placeholder.findViewById(R.id.element3);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(2).getName());
-        symbol.setText(elements.get(2).getSymbol());
-
-        box = placeholder.findViewById(R.id.element4);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(3).getName());
-        symbol.setText(elements.get(3).getSymbol());
-
-        box = placeholder.findViewById(R.id.element5);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(4).getName());
-        symbol.setText(elements.get(4).getSymbol());
-
-        box = placeholder.findViewById(R.id.element6);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(5).getName());
-        symbol.setText(elements.get(5).getSymbol());
-
-        box = placeholder.findViewById(R.id.element7);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(6).getName());
-        symbol.setText(elements.get(6).getSymbol());
-
-        box = placeholder.findViewById(R.id.element8);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(7).getName());
-        symbol.setText(elements.get(7).getSymbol());
-
-        box = placeholder.findViewById(R.id.element9);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(8).getName());
-        symbol.setText(elements.get(8).getSymbol());
-
-        box = placeholder.findViewById(R.id.element10);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(9).getName());
-        symbol.setText(elements.get(9).getSymbol());
-
-        box = placeholder.findViewById(R.id.element11);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(10).getName());
-        symbol.setText(elements.get(10).getSymbol());
-
-        box = placeholder.findViewById(R.id.element12);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(11).getName());
-        symbol.setText(elements.get(11).getSymbol());
-
-        box = placeholder.findViewById(R.id.element13);
-        name = box.findViewById(R.id.name);
-        symbol = box.findViewById(R.id.symbol);
-        name.setText(elements.get(12).getName());
-        symbol.setText(elements.get(12).getSymbol());
+        int indexCounter = 0;
+        int elementCounter = 0;
+        while (elementCounter < allElements.size() && indexCounter < allElements.size()) {
+            ConstraintLayout box = placeholder.findViewById(allElements.get(elementCounter));
+            TextView name = box.findViewById(R.id.name);
+            TextView symbol = box.findViewById(R.id.symbol);
+            TextView atomicNumber = box.findViewById(R.id.atomicNumber);
+            name.setText(elements.get(indexCounter).getName());
+            final String elementName = name.toString();
+            symbol.setText(elements.get(indexCounter).getSymbol());
+            atomicNumber.setText(Integer.toString(elements.get(indexCounter).getAtomicNumber()));
+            indexCounter++;
+            elementCounter++;
+        }
+        ConstraintLayout lanthanides = placeholder.findViewById(R.id.Lanthanides);
+        TextView lanthinidesName = lanthanides.findViewById(R.id.name);
+        TextView lanthinidesSymbol = lanthanides.findViewById(R.id.symbol);
+        TextView lanthinidesAtomicNumber = lanthanides.findViewById(R.id.atomicNumber);
+        lanthinidesName.setText(R.string.lanthanides);
+        lanthinidesSymbol.setText(R.string.down_arrow);
+        lanthinidesSymbol.setTextSize(14);
+        lanthinidesAtomicNumber.setText(R.string.lanthanides_atomic_number);
+        ConstraintLayout actinides = placeholder.findViewById(R.id.Actinides);
+        TextView actinidesName = actinides.findViewById(R.id.name);
+        TextView actinidesSymbol = actinides.findViewById(R.id.symbol);
+        TextView actinidesAtomicNumber = actinides.findViewById(R.id.atomicNumber);
+        actinidesName.setText(R.string.lanthanides);
+        actinidesSymbol.setText(R.string.down_arrow);
+        actinidesSymbol.setTextSize(14);
+        actinidesAtomicNumber.setText(R.string.actinides_atomic_number);
     }
-
-    //from https://stackoverflow.com/questions/7493287/android-how-do-i-get-string-from-resources-using-its-name/11595723#11595723
-    /*private int getStringResourceByName(String boxName) {
-        int resId = getResources().getIdentifier(boxName, "id", "com.example.periodictable.R");
-        return resId;
-    }*/
-
 }

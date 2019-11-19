@@ -4,6 +4,11 @@
     <string name="quiz">Quiz</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="lanthanides">Lanthanides</string>
+    <string name="actinides">Actinides</string>
+    <string name="down_arrow">∨</string>
+    <string name="lanthanides_atomic_number">57-71</string>
+    <string name="actinides_atomic_number">89-103</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
