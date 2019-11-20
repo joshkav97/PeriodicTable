@@ -1,7 +1,10 @@
 package com.example.periodictable;
 
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -10,20 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.google.android.material.navigation.NavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
-    private Toolbar toolbar;
     private NavigationView nvDrawer;
-    private ActionBarDrawerToggle drawerToggle;
-
-
 
 
     private void swapFragment(Fragment fragment) {
@@ -37,32 +32,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         Fragment fragment = new PeriodicTableFragment();
 
         swapFragment(fragment);
 
-        // Set a Toolbar to replace the ActionBar.
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        // This will display an Up icon (<-), we will replace it with hamburger later
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // Find our drawer view
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
-        // Setup drawer view
+        mDrawer = findViewById(R.id.drawer_layout);
+        nvDrawer = findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
     }
 
+    //The code for the following two methods (setupDrawerContent and onOptionsItemSelected)
+    //were made by following along with the following tutorial: https://guides.codepath.com/android/fragment-navigation-drawer
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
+                        selectMenuItem(menuItem);
                         return true;
                     }
                 });
@@ -70,29 +60,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // The action bar home/up action should open or close the drawer.
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean selectDrawerItem(@NonNull MenuItem menuItem) {
+    public boolean selectMenuItem(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.nav_periodic_table) {
             Fragment fragment = new PeriodicTableFragment();
             swapFragment(fragment);
             setTitle(menuItem.getTitle());
-            // Close the navigation drawer
             mDrawer.closeDrawers();
             return true;
         } else if (menuItem.getItemId() == R.id.nav_quiz) {
             Fragment fragment = new QuizFragment();
             swapFragment(fragment);
             setTitle(menuItem.getTitle());
-            // Close the navigation drawer
             mDrawer.closeDrawers();
             return true;
         }
