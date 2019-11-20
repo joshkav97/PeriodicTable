@@ -127,17 +127,12 @@ public class PeriodicTableFragment extends Fragment implements AsyncTaskInsertDe
     }
 
     public void setElementListeners2(int counter) {
-        final int counter2 = counter;
-        placeholder.findViewById(allElements.get(counter2)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, ElementDetailActivity.class);
-                TextView atomicNumber = placeholder.findViewById(allElements.get(counter2)).findViewById(R.id.atomicNumber);
-                intent.putExtra("atomicNumber", atomicNumber.getText());
-                context.startActivity(intent);
-            }
-        });
+        Context context = getContext();
+        Intent intent = new Intent(context, ElementDetailActivity.class);
+        TextView atomicNumber = placeholder.findViewById(allElements.get(counter)).findViewById(R.id.atomicNumber);
+        intent.putExtra("atomicNumber", atomicNumber.getText());
+        context.startActivity(intent);
+
     }
 
 
@@ -159,7 +154,6 @@ public class PeriodicTableFragment extends Fragment implements AsyncTaskInsertDe
             TextView symbol = box.findViewById(R.id.symbol);
             TextView atomicNumber = box.findViewById(R.id.atomicNumber);
             name.setText(elements.get(elementCounter).getName());
-            final String elementName = name.toString();
             symbol.setText(elements.get(elementCounter).getSymbol());
             atomicNumber.setText(Integer.toString(elements.get(elementCounter).getAtomicNumber()));
             elementCounter++;

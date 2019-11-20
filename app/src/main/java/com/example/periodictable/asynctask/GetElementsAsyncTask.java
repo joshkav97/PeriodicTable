@@ -9,7 +9,6 @@ import java.util.List;
 
 public class GetElementsAsyncTask extends AsyncTask<Void, Integer, List<Element>> {
     private AsyncTaskGetDelegate delegate;
-
     private AppDatabase database;
 
     public void setDelegate(AsyncTaskGetDelegate delegate) {
