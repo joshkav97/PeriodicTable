@@ -38,7 +38,5 @@ public class ElementDetailActivity extends AppCompatActivity implements AsyncTas
         atomicNumber = findViewById(R.id.atomicNumber);
         atomicNumber.setText(Integer.toString(element.getAtomicNumber()));
         atomicName.setText(element.getName());
-
-
     }
 }

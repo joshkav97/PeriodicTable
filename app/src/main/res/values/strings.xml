@@ -9,7 +9,7 @@
     <string name="down_arrow">∨</string>
     <string name="lanthanides_atomic_number">57-71</string>
     <string name="actinides_atomic_number">89-103</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="guess_element">What\'s the element with atomic number</string>
+    <string name="correct">Correct!</string>
+    <string name="incorrect">Incorrect!</string>
 </resources>

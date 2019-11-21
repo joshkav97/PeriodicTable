@@ -26,7 +26,7 @@ public class QuizFragment extends Fragment {
         quiz1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), quiz1.class);
+                Intent intent = new Intent(getActivity(), MultipleChoice.class);
                 startActivity(intent);
             }
         });
