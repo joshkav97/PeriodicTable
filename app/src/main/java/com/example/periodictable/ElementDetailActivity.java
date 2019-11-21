@@ -12,16 +12,47 @@ import com.example.periodictable.database.AppDatabase;
 
 public class ElementDetailActivity extends AppCompatActivity implements AsyncTaskFindDelegate {
 
-    private TextView atomicNumber;
-    private TextView atomicName;
+    public TextView atomicNumberTextView;
+    public TextView symbolTextView;
+    public TextView nameTextView;
+    public TextView atomicRadiusTextView;
+    public TextView boilingPointTextView;
+    public TextView yearDiscoveredTextView;
+    public TextView densityTextView;
+    public TextView bondingTypeTextView;
+    public TextView meltingPointTextView;
+    public TextView affinityTextView;
+    public TextView negativeTextView;
+    public TextView configTextView;
+    public TextView ionRadiusTextView;
+    public TextView energyTextView;
+    public TextView standardTextView;
+    public TextView vanTextView;
+    public TextView oxiTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_element_detail);
 
-        atomicNumber = findViewById(R.id.atomicNumber);
-        atomicName = findViewById(R.id.atomicName);
+        atomicNumberTextView = findViewById(R.id.atomicNumber);
+        symbolTextView = findViewById(R.id.symbol);
+        nameTextView = findViewById(R.id.name);
+        atomicRadiusTextView = findViewById(R.id.atomicRadius);
+        boilingPointTextView = findViewById(R.id.boilingPoint);
+        yearDiscoveredTextView = findViewById(R.id.yearDiscovered);
+        densityTextView = findViewById(R.id.density);
+        bondingTypeTextView = findViewById(R.id.bondingType);
+        meltingPointTextView = findViewById(R.id.meltingPoint);
+        affinityTextView = findViewById(R.id.electronAffinity);
+        negativeTextView = findViewById(R.id.electronNegativity);
+        configTextView = findViewById(R.id.electronConfiguration);
+        ionRadiusTextView = findViewById(R.id.ionRadius);
+        energyTextView = findViewById(R.id.ionisationEnergy);
+        standardTextView = findViewById(R.id.standardState);
+        vanTextView = findViewById(R.id.vanDerWaalsRadius);
+        oxiTextView = findViewById(R.id.oxidisationState);
 
         Intent intent = getIntent();
         int atomicNumber = Integer.parseInt(intent.getStringExtra("atomicNumber"));
@@ -35,8 +66,23 @@ public class ElementDetailActivity extends AppCompatActivity implements AsyncTas
 
     @Override
     public void handleTaskResult(Element element) {
-        atomicNumber = findViewById(R.id.atomicNumber);
-        atomicNumber.setText(Integer.toString(element.getAtomicNumber()));
-        atomicName.setText(element.getName());
+        atomicNumberTextView.setText(Integer.toString(element.getAtomicNumber()));
+        symbolTextView.setText(element.getSymbol());
+        nameTextView.setText(element.getName());
+        atomicRadiusTextView.setText(element.getAtomicRadius());
+        boilingPointTextView.setText(element.getBoilingPoint());
+        yearDiscoveredTextView.setText(element.getYearDiscovered());
+        densityTextView.setText(element.getDensity());
+        bondingTypeTextView.setText(element.getBondingType());
+        meltingPointTextView.setText(element.getMeltingPoint());
+        affinityTextView.setText(element.getElectronAffinity());
+        negativeTextView.setText(element.getElectronNegativity());
+        configTextView.setText(element.getElectronicConfiguration());
+        ionRadiusTextView.setText(element.getIonRadius());
+        energyTextView.setText(element.getIonizationEnergy());
+        standardTextView.setText(element.getStandardState());
+        vanTextView.setText(element.getVanDerWaalsRadius());
+        oxiTextView.setText(element.getOxidationStates());
+
     }
 }

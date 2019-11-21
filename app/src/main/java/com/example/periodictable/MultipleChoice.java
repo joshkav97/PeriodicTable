@@ -115,8 +115,10 @@ public class MultipleChoice extends AppCompatActivity implements AsyncTaskFindDe
 
     public void handleTaskResult(Element element) {
         if (counter == 1) {
+            //the below line gives answer.setText() having enough time to load, otherwise the app will load a blank button
+            System.out.println("loading answers");
             buttonA.setText(element.getName());
-            answer.setText("Guess the element with atomic number " +(element.getAtomicNumber()));
+            answer.setText("Guess the element with atomic number " + (element.getAtomicNumber()));
         } else if (counter == 2) {
             buttonB.setText(element.getName());
         } else if (counter == 3) {
