@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment;
 
 public class QuizFragment extends Fragment {
 
-    Button quiz1;
+    Button easy;
+    Button medium;
+    Button hard;
 
     public QuizFragment() {
     }
@@ -21,12 +23,33 @@ public class QuizFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_quiz, container, false);
 
-        quiz1 = view.findViewById(R.id.quiz1);
+        easy = view.findViewById(R.id.easy);
+        medium = view.findViewById(R.id.medium);
+        hard = view.findViewById(R.id.hard);
 
-        quiz1.setOnClickListener(new View.OnClickListener() {
+        easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MultipleChoice.class);
+                Intent intent = new Intent(getContext(), MultipleChoice.class);
+                intent.putExtra("difficulty", 20);
+                startActivity(intent);
+            }
+        });
+
+        medium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MultipleChoice.class);
+                intent.putExtra("difficulty", 50);
+                startActivity(intent);
+            }
+        });
+
+        hard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MultipleChoice.class);
+                intent.putExtra("difficulty", 118);
                 startActivity(intent);
             }
         });

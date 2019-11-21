@@ -13,14 +13,34 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/quiz1"
-            android:layout_width="wrap_content"
+            android:id="@+id/easy"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="Guess that Element!"
+            android:text="@string/easy"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/medium"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/easy" />
+
+        <Button
+            android:id="@+id/hard"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/hard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/medium" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

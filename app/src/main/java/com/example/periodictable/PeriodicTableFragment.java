@@ -129,7 +129,6 @@ public class PeriodicTableFragment extends Fragment implements AsyncTaskInsertDe
         TextView atomicNumber = placeholder.findViewById(allElements.get(counter)).findViewById(R.id.atomicNumber);
         intent.putExtra("atomicNumber", atomicNumber.getText());
         context.startActivity(intent);
-
     }
 
 

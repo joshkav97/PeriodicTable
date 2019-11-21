@@ -1,5 +1,6 @@
 package com.example.periodictable;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import com.example.periodictable.database.AppDatabase;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class MultipleChoice extends AppCompatActivity implements AsyncTaskFindDelegate {
 
@@ -25,6 +27,7 @@ public class MultipleChoice extends AppCompatActivity implements AsyncTaskFindDe
     Button buttonC;
     Button buttonD;
     int counter = 1;
+    int difficulty;
     List<Integer> answers = Arrays.asList(R.id.buttonA, R.id.buttonB, R.id.buttonC,
             R.id.buttonD);
 
@@ -32,6 +35,9 @@ public class MultipleChoice extends AppCompatActivity implements AsyncTaskFindDe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.multiple_choice);
+
+        Intent intent = getIntent();
+        difficulty = intent.getIntExtra("difficulty",118);
 
         int keyElementAtomicNumber = randomNumberGenerator();
         answer = findViewById(R.id.question);
@@ -79,11 +85,24 @@ public class MultipleChoice extends AppCompatActivity implements AsyncTaskFindDe
         startAsyncTask(answer2);
         startAsyncTask(answer3);
 
+        if (buttonA.getText().equals(null)){
+            getIntent();
+            finish();
+            startActivity(intent);
+        }
         buttonA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 result.setText(R.string.correct);
                 result.setTextColor(getResources().getColor(R.color.correct));
+                try {
+                    TimeUnit.MICROSECONDS.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
 
@@ -112,19 +131,20 @@ public class MultipleChoice extends AppCompatActivity implements AsyncTaskFindDe
         });
     }
 
-
     public void handleTaskResult(Element element) {
+        String name = element.getName();
         if (counter == 1) {
-            //the below line gives answer.setText() having enough time to load, otherwise the app will load a blank button
-            System.out.println("loading answers");
-            buttonA.setText(element.getName());
             answer.setText("Guess the element with atomic number " + (element.getAtomicNumber()));
+            //Note that there is a bug that sometimes causes the box with the correct answer to be blank.
+            //The bug also prevents the onClick method for the answer from working.
+            // We're not exactly sure what the cause of this bug is.
+            buttonA.setText(name);
         } else if (counter == 2) {
-            buttonB.setText(element.getName());
+            buttonB.setText(name);
         } else if (counter == 3) {
-            buttonC.setText(element.getName());
+            buttonC.setText(name);
         } else if (counter == 4) {
-            buttonD.setText(element.getName());
+            buttonD.setText(name);
         }
         counter++;
     }
@@ -137,7 +157,7 @@ public class MultipleChoice extends AppCompatActivity implements AsyncTaskFindDe
 
     int randomNumberGenerator() {
         Random random = new Random();
-        int generatedNumber = random.nextInt(118) + 1;
+        int generatedNumber = random.nextInt(difficulty) + 1;
         return generatedNumber;
     }
 
